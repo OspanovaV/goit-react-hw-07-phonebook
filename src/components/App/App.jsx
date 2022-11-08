@@ -4,7 +4,6 @@ import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
 import { filterContacts } from 'redux/filterSlice';
 import { getContacts, getFilter } from 'redux/selector';
-import { addContactItem } from 'redux/contactsSlice';
 import { Container, Section, TitleH1, TitleH2 } from './AppStyled';
 
 export const App = () => {
@@ -13,7 +12,7 @@ export const App = () => {
   const filterName = useSelector(getFilter);
   
 // Добавляет контакт в список
-   const addContact = ({ name, number }) => {
+   const addContact = ({ name, phone }) => {
     const normalizedFind = name.toLowerCase();
     const findName = contacts.find(
       contact => contact.name.toLowerCase() === normalizedFind
@@ -23,13 +22,13 @@ export const App = () => {
     }
 
     const findNumber = contacts.find(
-      contact => contact.number === number
+      contact => contact.phone === phone
     );
     if (findNumber) {
       return alert(`This phone number is already in use.`);
     }
    
-     dispatch(addContactItem({ name, number }));
+     dispatch(addContact({ name, phone }));
   };
   
   const handleFilter = evt => {
