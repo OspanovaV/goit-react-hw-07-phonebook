@@ -12,7 +12,7 @@ export const App = () => {
   const filterName = useSelector(getFilter);
   
 // Добавляет контакт в список
-   const addContact = ({ name, phone }) => {
+   const addContact = ({ name, number }) => {
     const normalizedFind = name.toLowerCase();
     const findName = contacts.find(
       contact => contact.name.toLowerCase() === normalizedFind
@@ -22,13 +22,13 @@ export const App = () => {
     }
 
     const findNumber = contacts.find(
-      contact => contact.phone === phone
+      contact => contact.number === number
     );
     if (findNumber) {
       return alert(`This phone number is already in use.`);
     }
    
-     dispatch(addContact({ name, phone }));
+     dispatch(addContact({ name, number }));
   };
   
   const handleFilter = evt => {
