@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
 import { filterContacts } from 'redux/filterSlice';
-import { addContact } from 'redux/operations';
+import { addContact, fetchContacts } from 'redux/operations';
 import { selectContacts, selectFilter } from 'redux/selector';
 import { Container, Section, TitleH1, TitleH2 } from './AppStyled';
 
@@ -12,6 +13,8 @@ export const App = () => {
   const contacts = useSelector(selectContacts);
   const filterName = useSelector(selectFilter);
   
+useEffect(() => { dispatch(fetchContacts()) }, [dispatch]);
+
 // Добавляет контакт в список
    const addNewContact = ({ name, phone }) => {
     const normalizedFind = name.toLowerCase();
